@@ -11,7 +11,6 @@ MAX_CONNECTIONS = 50
 def main():
     logger = logging.getLogger('maigret')
     logger.setLevel(logging.WARNING)
-    loop = asyncio.get_event_loop()
 
     db = maigret.MaigretDatabase().load_from_file('./maigret/resources/data.json')
 
@@ -55,7 +54,7 @@ def main():
         is_parsing_enabled=extract_info,
     )
 
-    results = loop.run_until_complete(search_func)
+    results = asyncio.run(search_func)
 
     input('Search completed. Press any key to show results.')
 
